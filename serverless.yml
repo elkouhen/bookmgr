@@ -1,0 +1,70 @@
+service: lambda1
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+
+plugins:
+  - serverless-openapi-documentation
+  - serverless-aws-documentation
+  - serverless-apigateway-plugin
+  - fullstack-serverless
+
+functions:
+  hello:
+    handler: bookmanager-api.handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+          cors: true
+          documentation:
+            summary: Say Hello
+            description: Say Hello
+            methodResponses:
+              - statusCode: 200
+                responseBody:
+                  description: "Helloworld Response"
+                responseModels:
+                  "application/json": "HelloworldResponse"
+
+custom:
+  openApiPath: openapi.yml
+
+  documentation:
+    api:
+      info:
+        version: '1'
+        title: 'Helloworld API'
+        description: 'Helloworld API'
+
+    models:
+      - name: "HelloworldResponse"
+        description: "Helloworld Response"
+        contentType: "application/json"
+        schema:
+          type: "object"
+          properties:
+            message:
+              type: "string"
+
+  fullstack:
+    domain: www.melkouhen.me
+    certificate: arn:aws:acm:us-east-1:629923658207:certificate/c2519af3-3275-466d-96f9-0986b2398a83
+    bucketName: bookmgr-app-2020
+    distributionFolder: bookmgr-app/build
+    indexDocument: index.html
+    errorDocument: error.html
+    singlePageApp: true
+    compressWebContent: true
+    apiPath: dev
+    #    apiGatewayRestApiId: a12bc34df5            # If "Api Gateway Rest Api" is not part of the same serverless template, you can set your API id here
+    clientCommand: yarn build
+    clientSrcPath: bookmgr-app
+    minimumProtocolVersion: TLSv1.2_2018
+    priceClass: PriceClass_100
+    noConfirm: true
+
+  stage: ${opt:stage, self:provider.stage}

@@ -1,0 +1,51 @@
+service: bookmgr-api
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+
+plugins:
+  - serverless-openapi-documentation
+  - serverless-aws-documentation
+  - serverless-apigateway-plugin
+  - serverless-stack-output
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+          cors: true
+          documentation:
+            summary: Say Hello
+            description: Say Hello
+            methodResponses:
+              - statusCode: 200
+                responseBody:
+                  description: "Helloworld Response"
+                responseModels:
+                  "application/json": "HelloworldResponse"
+
+custom:
+  openApiPath: openapi.yml
+
+  documentation:
+    api:
+      info:
+        version: '1'
+        title: 'Helloworld API'
+        description: 'Helloworld API'
+
+    models:
+      - name: "HelloworldResponse"
+        description: "Helloworld Response"
+        contentType: "application/json"
+        schema:
+          type: "object"
+          properties:
+            message:
+              type: "string"
