@@ -7,8 +7,8 @@ import "bootstrap/dist/css/bootstrap.css";
 
 ReactDOM.render(
     <React.StrictMode >
-    <div class="container-fluid">
-    <App / >
+    <div className="container-fluid">
+      <App / >
     </div>
     
     </React.StrictMode>,

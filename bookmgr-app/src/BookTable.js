@@ -9,6 +9,7 @@ export default class BookTable extends React.Component {
   };
 
   componentDidMount() {
+	
     axios.get(`http://localhost:4000/dev/books`).then((res) => {
       const books = res.data;
       this.setState({ books });
