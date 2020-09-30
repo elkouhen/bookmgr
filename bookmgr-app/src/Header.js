@@ -6,7 +6,7 @@ function Header() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="#">
-        BookMgr
+        Book Mgr
       </a>
       <button
         className="navbar-toggler"

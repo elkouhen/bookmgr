@@ -2,14 +2,17 @@ import json
 
 
 def list_books(event, context):
-    body = [{
-        "title": "Go Serverless v1.0 !",
-        "author": "serverless.com"
-    },
-    {
-        "title": "Go Serverless v2.0 !",
-        "author": "serverless.com"
-    }]
+    body = [
+        {
+            "key": 0,
+            "title": "Go Serverless v1.0 !",
+            "author": "serverless.com"
+        },
+        {
+            "key": 1,
+            "title": "Go Serverless v2.0 !",
+            "author": "serverless.com"
+        }]
 
     response = {
         "statusCode": 200,
