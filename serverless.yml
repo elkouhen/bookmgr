@@ -59,8 +59,8 @@ custom:
     errorDocument: error.html
     singlePageApp: true
     compressWebContent: true
-    apiPath: dev
-    #    apiGatewayRestApiId: a12bc34df5            # If "Api Gateway Rest Api" is not part of the same serverless template, you can set your API id here
+    # apiPath: dev
+    # apiGatewayRestApiId: a12bc34df5            # If "Api Gateway Rest Api" is not part of the same serverless template, you can set your API id here
     clientCommand: yarn build
     clientSrcPath: bookmgr-app
     minimumProtocolVersion: TLSv1.2_2018
