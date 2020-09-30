@@ -11,24 +11,25 @@ plugins:
   - serverless-aws-documentation
   - serverless-apigateway-plugin
   - serverless-stack-output
+  - serverless-offline
 
 functions:
-  hello:
-    handler: handler.hello
+  list_books:
+    handler: handler.list_books
     events:
       - http:
-          path: hello
+          path: books
           method: get
           cors: true
           documentation:
-            summary: Say Hello
-            description: Say Hello
+            summary: List Books
+            description: List Books
             methodResponses:
               - statusCode: 200
                 responseBody:
-                  description: "Helloworld Response"
+                  description: "Book Response"
                 responseModels:
-                  "application/json": "HelloworldResponse"
+                  "application/json": "BookResponse"
 
 custom:
   openApiPath: openapi.yml
@@ -37,15 +38,20 @@ custom:
     api:
       info:
         version: '1'
-        title: 'Helloworld API'
-        description: 'Helloworld API'
+        title: 'Book API'
+        description: 'Book API'
 
     models:
-      - name: "HelloworldResponse"
-        description: "Helloworld Response"
+      - name: "BookResponse"
+        description: "Book Response"
         contentType: "application/json"
         schema:
           type: "object"
           properties:
-            message:
+            title:
               type: "string"
+            author:
+              type: "string"
+
+  serverless-offline:
+      httpPort: 4000
