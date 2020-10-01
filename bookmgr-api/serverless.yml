@@ -36,7 +36,7 @@ functions:
 
 resources:
   tables:
-    Books:
+    books:
       partitionKey: Author
       sortKey: Title
       indexes:
@@ -86,3 +86,9 @@ custom:
       migrate: true
       seed: true
       convertEmptyValues: true
+    
+    seed:
+      domain:
+        sources:
+          - table: books
+            sources: [./books.json]
