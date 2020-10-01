@@ -12,11 +12,18 @@ plugins:
   - serverless-apigateway-plugin
   - serverless-plugin-tables
   - serverless-dynamodb-local
+  - serverless-iam-roles-per-function
   - serverless-offline
   - serverless-python-requirements
 functions:
   list_books:
     handler: handler.list_books
+    iamRoleStatementsName: bookmgr-api-list-books-role #optional custom role name setting instead of the default generated one
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - dynamodb:scan
+        Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/books"
     events:
       - http:
           path: books
