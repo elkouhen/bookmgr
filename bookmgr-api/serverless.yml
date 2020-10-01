@@ -14,10 +14,10 @@ plugins:
   - serverless-plugin-tables
   - serverless-dynamodb-local
   - serverless-offline
-
+  - serverless-python-requirements
 functions:
   list_books:
-    handler: handler.list_books
+    handler: handler.list_books_handler
     events:
       - http:
           path: books
