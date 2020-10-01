@@ -18,7 +18,7 @@ plugins:
 functions:
   list_books:
     handler: handler.list_books
-    iamRoleStatementsName: bookmgr-api-list-books-role #optional custom role name setting instead of the default generated one
+    iamRoleStatementsName: bookmgr-api-list-books-${opt:stage, self:provider.stage}-role #optional custom role name setting instead of the default generated one
     iamRoleStatements:
       - Effect: "Allow"
         Action:
