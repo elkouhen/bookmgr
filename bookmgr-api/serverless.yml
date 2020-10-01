@@ -35,12 +35,12 @@ functions:
 resources:
   tables:
     books:
-      partitionKey: Author
-      sortKey: Title
+      partitionKey: author
+      sortKey: title
       indexes:
         - name: AuthorByTitleIndex
-          partitionKey: Author
-          sortKey: Title
+          partitionKey: author
+          sortKey: title
 
 custom:
   openApiPath: openapi.yml
