@@ -5,6 +5,13 @@ import boto3
 from dynamodb_json import json_util as dynamodb_json
 
 
+def create_dynamodb_client():
+    if os.environ['IS_OFFLINE']:
+        return boto3.client("dynamodb", region_name="localhost", endpoint_url="http://localhost:8000")
+    else:
+        return boto3.client("dynamodb")
+
+
 def list_books_(client):
     books = client.scan(TableName="books")['Items']
 
@@ -20,13 +27,6 @@ def list_books_handler(event, context):
         "statusCode": 200,
         "body": json.dumps(books)
     }
-
-
-def create_dynamodb_client():
-    if os.environ['IS_OFFLINE']:
-        return boto3.client("dynamodb", region_name="localhost", endpoint_url="http://localhost:8000")
-    else:
-        return boto3.client("dynamodb")
 
 
 def main():
