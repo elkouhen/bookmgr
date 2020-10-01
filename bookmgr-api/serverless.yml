@@ -10,7 +10,7 @@ provider:
 plugins:
   - serverless-aws-documentation
   - serverless-openapi-documentation
-  # - serverless-apigateway-plugin
+  - serverless-apigateway-plugin
   - serverless-plugin-tables
   - serverless-dynamodb-local
   - serverless-iam-roles-per-function
