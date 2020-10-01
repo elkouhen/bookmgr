@@ -7,25 +7,25 @@ provider:
   runtime: python3.8
 
 plugins:
-  - serverless-aws-documentation
-  - serverless-openapi-documentation
   - serverless-apigateway-plugin
   - serverless-plugin-tables
   - serverless-dynamodb-local
   - serverless-iam-roles-per-function
   - serverless-offline
   - serverless-python-requirements
+
+
 functions:
   list_books:
     handler: handler.list_books
-    iamRoleStatementsName: bookmgr-api-list-books-${opt:stage, self:provider.stage}-role #optional custom role name setting instead of the default generated one
+    iamRoleStatementsName: bookmgr-api-list-books-${opt:stage, self:provider.stage}-role
     iamRoleStatements:
       - Effect: "Allow"
         Action:
           - dynamodb:scan
         Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/books"
     layers:
-      - {Ref: PythonRequirementsLambdaLayer}
+      - { Ref: PythonRequirementsLambdaLayer }
     events:
       - http:
           path: books
@@ -46,7 +46,7 @@ resources:
       partitionKey: author
       sortKey: title
       indexes:
-        - name: AuthorByTitleIndex
+        - name: authorByTitleIndex
           partitionKey: author
           sortKey: title
 
@@ -72,11 +72,6 @@ custom:
                 type: "string"
               author:
                 type: "string"
-
-  tables:
-    dynamo:
-      # Dynamo options
-      deploymentBatchSize: 5
 
   serverless-offline:
     httpPort: 4000
