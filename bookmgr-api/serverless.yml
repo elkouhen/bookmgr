@@ -90,3 +90,6 @@ custom:
         sources:
           - table: books
             sources: [./books.json]
+
+  pythonRequirements:
+    layer: true
