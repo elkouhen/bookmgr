@@ -1,4 +1,7 @@
-[{
+[
+  {
+    "id": 1,
     "author": "GoF",
     "title": "Design Patterns"
-}]
+  }
+]

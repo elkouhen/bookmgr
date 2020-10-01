@@ -18,7 +18,7 @@ def list_books_(client):
     return dynamodb_json.loads(books)
 
 
-def list_books_handler(event, context):
+def list_books(event, context):
     dynamodb = create_dynamodb_client()
 
     books = list_books_(dynamodb)

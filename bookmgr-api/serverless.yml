@@ -7,17 +7,16 @@ provider:
   runtime: python3.8
 
 plugins:
-  - serverless-openapi-documentation
   - serverless-aws-documentation
+  - serverless-openapi-documentation
   - serverless-apigateway-plugin
-  - serverless-stack-output
   - serverless-plugin-tables
   - serverless-dynamodb-local
   - serverless-offline
   - serverless-python-requirements
 functions:
   list_books:
-    handler: handler.list_books_handler
+    handler: handler.list_books
     events:
       - http:
           path: books
@@ -57,23 +56,25 @@ custom:
         description: "Book Response"
         contentType: "application/json"
         schema:
-          type: "object"
-          properties:
-            title:
-              type: "string"
-            author:
-              type: "string"
-  
-  tables: 
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              title:
+                type: "string"
+              author:
+                type: "string"
+
+  tables:
     dynamo:
       # Dynamo options
       deploymentBatchSize: 5
 
   serverless-offline:
-      httpPort: 4000
+    httpPort: 4000
 
   dynamodb:
-  # If you only want to use DynamoDB Local in some stages, declare them here
+    # If you only want to use DynamoDB Local in some stages, declare them here
     stages:
       - dev
     start:
@@ -84,12 +85,12 @@ custom:
       migrate: true
       seed: true
       convertEmptyValues: true
-    
+
     seed:
       domain:
         sources:
           - table: books
-            sources: [./books.json]
+            sources: [ ./books.json ]
 
   pythonRequirements:
     layer: true
