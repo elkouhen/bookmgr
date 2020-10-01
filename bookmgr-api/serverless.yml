@@ -11,6 +11,7 @@ plugins:
   - serverless-openapi-documentation
   - serverless-apigateway-plugin
   - serverless-plugin-tables
+  - serverless-stack-output
   - serverless-dynamodb-local
   - serverless-iam-roles-per-function
   - serverless-offline
