@@ -51,7 +51,6 @@ resources:
           sortKey: title
 
 custom:
-  openApiPath: openapi.yml
 
   documentation:
     api:
