@@ -7,11 +7,11 @@ provider:
   runtime: python3.8
 
 plugins:
-  - serverless-aws-documentation
   - serverless-openapi-documentation
+  - serverless-aws-documentation
   - serverless-apigateway-plugin
-  - serverless-plugin-tables
   - serverless-stack-output
+  - serverless-plugin-tables
   - serverless-dynamodb-local
   - serverless-iam-roles-per-function
   - serverless-offline
@@ -30,17 +30,17 @@ functions:
       - { Ref: PythonRequirementsLambdaLayer }
     events:
       - http:
-          path: books
-          method: get
-          documentation:
-            summary: Get Books
-            description: Get Books
-            methodResponses:
-              - statusCode: '200'
-                responseBody:
-                  description: "Book Response"
-                responseModels:
-                  "application/json": "GetBooksResponse"
+        path: books
+        method: get
+        documentation:
+          summary: Get Books
+          description: Get Books
+          methodResponses:
+            - statusCode: '200'
+              responseBody:
+                description: "Book Response"
+              responseModels:
+                "application/json": "BookResponse"
 
 resources:
   tables:
@@ -53,9 +53,17 @@ resources:
           sortKey: title
 
 custom:
+  openApiPath: openapi.yml
+
+  documentation:
+    api:
+      info:
+        version: '1'
+        title: 'Book API'
+        description: 'Book API'
 
   models:
-    - name: "GetBooksResponse"
+    - name: "BookResponse"
       description: "Get Books Response"
       contentType: "application/json"
       schema:
