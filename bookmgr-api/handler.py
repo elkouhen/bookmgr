@@ -2,13 +2,13 @@ import json
 import os
 
 import boto3
-from dynamodb_json import json_util as json
+from dynamodb_json import json_util as dynamodb_json
 
 
 def list_books_(client):
     books = client.scan(TableName="books")['Items']
 
-    return json.loads(books)
+    return dynamodb_json.loads(books)
 
 
 def list_books_handler(event, context):
@@ -16,9 +16,10 @@ def list_books_handler(event, context):
 
     books = list_books_(dynamodb)
 
-    print(books[0])
-
-    return books[0]
+    return {
+        "statusCode": 200,
+        "body": json.dumps(books)
+    }
 
 
 def create_dynamodb_client():
