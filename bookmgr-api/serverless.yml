@@ -22,7 +22,6 @@ functions:
       - http:
           path: books
           method: get
-          cors: true
           documentation:
             summary: List Books
             description: List Books
@@ -32,7 +31,6 @@ functions:
                   description: "Book Response"
                 responseModels:
                   "application/json": "BookResponse"
-
 
 resources:
   tables:
