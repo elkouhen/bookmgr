@@ -7,6 +7,8 @@ provider:
   runtime: python3.8
 
 plugins:
+  - serverless-aws-documentation
+  - serverless-openapi-documentation
   - serverless-apigateway-plugin
   - serverless-plugin-tables
   - serverless-dynamodb-local
@@ -63,40 +65,12 @@ custom:
       - name: "BookResponse"
         description: "Book Response"
         contentType: "application/json"
-        schema:
-          type: "array"
-          items:
-            type: "object"
-            properties:
-              title:
-                type: "string"
-              author:
-                type: "string"
+        schema: ${file(schemas/BooksResponse.yml)}
 
-  serverless-offline:
-    httpPort: 4000
+  tables: ${file(config.yml):tables}
 
-  dynamodb:
-    # If you only want to use DynamoDB Local in some stages, declare them here
-    stages:
-      - dev
-    start:
-      port: 8000
-      inMemory: true
-      heapInitial: 200m
-      heapMax: 1g
-      migrate: true
-      seed: true
-      convertEmptyValues: true
+  serverless-offline: ${file(config.yml):serverless-offline}
 
-    seed:
-      domain:
-        sources:
-          - table: books
-            sources: [ ./books.json ]
+  dynamodb: ${file(config.yml):dynamodb}
 
-  pythonRequirements:
-    layer: true
-    noDeploy:
-      - pytest
-      - boto3
+  pythonRequirements: ${file(config.yml):pythonRequirements}
