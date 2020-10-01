@@ -1,9 +1,0 @@
-service: bookmgr-api-gateway
-
-frameworkVersion: '2'
-
-provider:
-  name: aws
-
-plugins:
-  - serverless-apigateway-plugin

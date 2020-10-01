@@ -5,22 +5,22 @@ frameworkVersion: '2'
 provider:
   name: aws
   runtime: python3.8
+  ApiGatewayRestApi: 2htvgji2t2
 
 plugins:
   - serverless-aws-documentation
   - serverless-openapi-documentation
-  - serverless-apigateway-plugin
+  # - serverless-apigateway-plugin
   - serverless-plugin-tables
   - serverless-dynamodb-local
   - serverless-iam-roles-per-function
   - serverless-offline
   - serverless-python-requirements
 
-
 functions:
-  list_books:
-    handler: handler.list_books
-    iamRoleStatementsName: bookmgr-api-list-books-${opt:stage, self:provider.stage}-role
+  get_books:
+    handler: handler.get_books
+    iamRoleStatementsName: bookmgr-api-get-books-${opt:stage, self:provider.stage}-role
     iamRoleStatements:
       - Effect: "Allow"
         Action:
@@ -33,14 +33,14 @@ functions:
           path: books
           method: get
           documentation:
-            summary: List Books
-            description: List Books
+            summary: Get Books
+            description: Get Books
             methodResponses:
               - statusCode: '200'
                 responseBody:
                   description: "Book Response"
                 responseModels:
-                  "application/json": "BookResponse"
+                  "application/json": "GetBooksResponse"
 
 resources:
   tables:
@@ -54,18 +54,19 @@ resources:
 
 custom:
 
-  documentation:
-    api:
-      info:
-        version: '1'
-        title: 'Book API'
-        description: 'Book API'
-
-    models:
-      - name: "BookResponse"
-        description: "Book Response"
-        contentType: "application/json"
-        schema: ${file(schemas/BooksResponse.yml)}
+  models:
+    - name: "GetBooksResponse"
+      description: "Get Books Response"
+      contentType: "application/json"
+      schema:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            title:
+              type: "string"
+            author:
+              type: "string"
 
   tables: ${file(config.yml):tables}
 

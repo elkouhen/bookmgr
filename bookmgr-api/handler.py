@@ -12,16 +12,16 @@ def create_dynamodb_client():
         return boto3.client("dynamodb")
 
 
-def list_books_(client):
+def get_books_(client):
     books = client.scan(TableName="books")['Items']
 
     return dynamodb_json.loads(books)
 
 
-def list_books(event, context):
+def get_books(event, context):
     dynamodb = create_dynamodb_client()
 
-    books = list_books_(dynamodb)
+    books = get_books_(dynamodb)
 
     return {
         "statusCode": 200,
