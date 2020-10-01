@@ -1,0 +1,56 @@
+service: bookmgr-api-ping
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+
+plugins:
+  - serverless-aws-documentation
+  - serverless-openapi-documentation
+  - serverless-import-apigateway
+  - serverless-offline
+  - serverless-python-requirements
+
+functions:
+  ping:
+    handler: handler.ping
+    iamRoleStatementsName: bookmgr-api-ping-${opt:stage, self:provider.stage}-role
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - dynamodb:scan
+        Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/books"
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
+    events:
+      - http:
+          path: ping
+          method: get
+          documentation:
+            summary: Ping
+            description: Ping
+            methodResponses:
+              - statusCode: '200'
+                responseBody:
+                  description: "Ping Response"
+                responseModels:
+                  "application/json": "PingResponse"
+
+custom:
+
+  importApiGateway:
+    name: dev-bookmgr-api
+
+  models:
+    - name: "PingResponse"
+      description: "Ping Response"
+      contentType: "application/json"
+      schema:
+        type: "object"
+        properties:
+          pong:
+            type: "string"
+
+  pythonRequirements: ${file(config.yml):pythonRequirements}
