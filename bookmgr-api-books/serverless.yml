@@ -1,4 +1,4 @@
-service: bookmgr-api
+service: bookmgr-api-books
 
 frameworkVersion: '2'
 
@@ -54,7 +54,7 @@ resources:
 custom:
 
   importApiGateway:
-    name: dev-bookmgr-api-ping
+    name: dev-bookmgr-api
 
   documentation:
     models:
