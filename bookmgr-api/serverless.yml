@@ -54,7 +54,7 @@ custom:
         schema:
           type: "object"
           properties:
-            pong:
+            ping:
               type: "string"
 
   pythonRequirements: ${file(config.yml):pythonRequirements}
