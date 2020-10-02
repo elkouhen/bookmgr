@@ -54,7 +54,7 @@ resources:
 custom:
 
   importApiGateway:
-    name: dev-bookmgr-api
+    name: dev-bookmgr-api-ping
 
   documentation:
     models:

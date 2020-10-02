@@ -1,4 +1,4 @@
-service: bookmgr-api-ping
+service: bookmgr-api
 
 frameworkVersion: '2'
 
