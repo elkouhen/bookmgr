@@ -8,22 +8,11 @@ provider:
 
 plugins:
   - serverless-aws-documentation
-  - serverless-openapi-documentation
   - serverless-apigateway-plugin
-  - serverless-offline
-  - serverless-python-requirements
 
 functions:
   ping:
     handler: handler.ping
-    iamRoleStatementsName: bookmgr-api-ping-${opt:stage, self:provider.stage}-role
-    iamRoleStatements:
-      - Effect: "Allow"
-        Action:
-          - dynamodb:scan
-        Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/books"
-    layers:
-      - { Ref: PythonRequirementsLambdaLayer }
     events:
       - http:
           path: ping
@@ -56,5 +45,3 @@ custom:
           properties:
             ping:
               type: "string"
-
-  pythonRequirements: ${file(config.yml):pythonRequirements}

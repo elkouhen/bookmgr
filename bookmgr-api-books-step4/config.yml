@@ -1,0 +1,8 @@
+serverless-offline:
+  httpPort: 4000
+
+tables:
+  dynamo:
+    # Dynamo options
+    deploymentBatchSize: 5
+
