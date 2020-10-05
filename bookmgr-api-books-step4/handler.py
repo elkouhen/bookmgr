@@ -15,7 +15,7 @@ def create_dynamodb_client():
 def get_books_(client):
     books = client.scan(TableName="books")['Items']
 
-    return books
+    return dynamodb_json.loads(books)
 
 
 def get_books(event, context):
