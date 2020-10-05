@@ -10,8 +10,10 @@ plugins:
   - serverless-aws-documentation
   - serverless-import-apigateway
   - serverless-plugin-tables
+  - serverless-dynamodb-local
   - serverless-iam-roles-per-function
   - serverless-offline
+  - serverless-python-requirements
 
 functions:
   get_books:
@@ -22,6 +24,8 @@ functions:
         Action:
           - dynamodb:scan
         Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/books"
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
     events:
       - http:
           path: books
@@ -70,3 +74,6 @@ custom:
 
   serverless-offline: ${file(config.yml):serverless-offline}
 
+  dynamodb: ${file(config.yml):dynamodb}
+
+  pythonRequirements: ${file(config.yml):pythonRequirements}

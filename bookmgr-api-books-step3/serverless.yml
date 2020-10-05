@@ -23,6 +23,8 @@ functions:
         Action:
           - dynamodb:scan
         Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/books"
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
     events:
       - http:
           path: books

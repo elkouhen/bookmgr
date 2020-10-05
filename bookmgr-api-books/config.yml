@@ -1,10 +1,10 @@
+serverless-offline:
+  httpPort: 4000
+
 tables:
   dynamo:
     # Dynamo options
     deploymentBatchSize: 5
-
-serverless-offline:
-  httpPort: 4000
 
 dynamodb:
   # If you only want to use DynamoDB Local in some stages, declare them here
