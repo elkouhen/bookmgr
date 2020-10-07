@@ -8,6 +8,7 @@ provider:
 
 plugins:
   - serverless-aws-documentation
+  - serverless-openapi-documentation
   - serverless-apigateway-plugin
 
 functions:

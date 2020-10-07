@@ -9,6 +9,7 @@ provider:
 plugins:
   - serverless-aws-documentation
   - serverless-import-apigateway
+  - serverless-offline
 
 functions:
   get_books:
