@@ -1,0 +1,20 @@
+service: bookmgr-route53
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+
+resources: # CloudFormation template syntax
+  Resources:
+    WebsiteDNSRecord:
+      Type: 'AWS::Route53::RecordSetGroup'
+      Properties:
+        HostedZoneId: 'Z0524616Y7E6M344S9XD'
+        RecordSets:
+          - Name: 'www.melkouhen.me'
+            Type: A
+            AliasTarget:
+              HostedZoneId: 'Z2FDTNDATAQYW2'
+              DNSName: ${cf:bookmgr-app-dev.ApiDistribution}
