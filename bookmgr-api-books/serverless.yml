@@ -53,7 +53,7 @@ resources:
 custom:
 
   importApiGateway:
-    name: dev-bookmgr-api
+    name: ${opt:stage, self:provider.stage}-bookmgr-api
 
   documentation:
     models:

@@ -20,7 +20,7 @@ custom:
     errorDocument: error.html
     singlePageApp: true
     compressWebContent: true
-    apiPath: /dev
+    apiPath: /${opt:stage, self:provider.stage}
     apiGatewayRestApiId: ${cf:bookmgr-api-dev.AwsDocApiId}
     clientCommand: yarn build
     clientSrcPath: .
