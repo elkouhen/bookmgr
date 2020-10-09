@@ -20,25 +20,10 @@ custom:
     errorDocument: error.html
     singlePageApp: true
     compressWebContent: true
-    apiPath: ${opt:stage, self:provider.stage}
+    #apiPath: /dev
     apiGatewayRestApiId: ${cf:bookmgr-api-dev.AwsDocApiId}
     clientCommand: yarn build
     clientSrcPath: .
-    minimumProtocolVersion: TLSv1.2_2018
     priceClass: PriceClass_100
     noConfirm: true
 
-#  stage: ${opt:stage, self:provider.stage}
-
-resources: # CloudFormation template syntax
-  Resources:
-    WebsiteDNSRecord:
-      Type: 'AWS::Route53::RecordSetGroup'
-      Properties:
-        HostedZoneId: 'Z0524616Y7E6M344S9XD'
-        RecordSets:
-          - Name: 'www.melkouhen.me'
-            Type: A
-            AliasTarget:
-              HostedZoneId: 'Z2FDTNDATAQYW2'
-              DNSName: 'd2e9gk7ggx79bj.cloudfront.net'
