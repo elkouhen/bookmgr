@@ -21,7 +21,7 @@ custom:
     singlePageApp: true
     compressWebContent: true
     apiPath: /${opt:stage, self:provider.stage}
-    apiGatewayRestApiId: ${cf:bookmgr-api-dev.AwsDocApiId}
+    apiGatewayRestApiId: ${cf:bookmgr-api-${opt:stage, self:provider.stage}.AwsDocApiId}
     clientCommand: yarn build
     clientSrcPath: .
     priceClass: PriceClass_100
