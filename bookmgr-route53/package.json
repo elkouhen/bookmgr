@@ -1,5 +1,5 @@
 {
-    "name": "bookmgr-app",
+    "name": "bookmgr-route53",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
