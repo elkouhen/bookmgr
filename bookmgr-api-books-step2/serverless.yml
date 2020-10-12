@@ -9,19 +9,11 @@ provider:
 plugins:
   - serverless-aws-documentation
   - serverless-import-apigateway
-  - serverless-plugin-tables
-  - serverless-iam-roles-per-function
   - serverless-offline
 
 functions:
   get_books:
     handler: handler.get_books
-    iamRoleStatementsName: bookmgr-api-get-books-${opt:stage, self:provider.stage}-role
-    iamRoleStatements:
-      - Effect: "Allow"
-        Action:
-          - dynamodb:scan
-        Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/books"
     events:
       - http:
           path: books
@@ -35,16 +27,6 @@ functions:
                   description: "Book Response"
                 responseModels:
                   "application/json": "BookResponse"
-
-resources:
-  tables:
-    books:
-      partitionKey: author
-      sortKey: title
-      indexes:
-        - name: authorByTitleIndex
-          partitionKey: author
-          sortKey: title
 
 custom:
 
@@ -65,6 +47,3 @@ custom:
                 type: "string"
               author:
                 type: "string"
-
-  serverless-offline: ${file(config.yml):serverless-offline}
-

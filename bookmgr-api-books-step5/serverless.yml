@@ -10,6 +10,7 @@ plugins:
   - serverless-aws-documentation
   - serverless-import-apigateway
   - serverless-plugin-tables
+  - serverless-dynamodb-local
   - serverless-iam-roles-per-function
   - serverless-offline
   - serverless-python-requirements
@@ -72,5 +73,30 @@ custom:
   tables: ${file(config.yml):tables}
 
   serverless-offline: ${file(config.yml):serverless-offline}
+
+  dynamodb:
+    # If you only want to use DynamoDB Local in some stages, declare them here
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      heapInitial: 200m
+      heapMax: 1g
+      migrate: true
+      convertEmptyValues: true
+
+    seed:
+      domain:
+        sources:
+          - table: books
+            sources: [ ./data/books.json ]
+
+  fixtures:
+    rules:
+      - table: book
+        enable: true
+        sources:
+          - ./data/books.json
 
   pythonRequirements: ${file(config.yml):pythonRequirements}
