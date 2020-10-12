@@ -1,4 +1,4 @@
-service: bookmgr-app
+service: bookmgr-gui
 
 frameworkVersion: '2'
 
