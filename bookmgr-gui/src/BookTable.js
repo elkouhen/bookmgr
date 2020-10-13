@@ -23,7 +23,7 @@ export default class BookTable extends React.Component {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
+        
               <th scope="col">Author</th>
               <th scope="col">Title</th>
             </tr>
@@ -31,7 +31,7 @@ export default class BookTable extends React.Component {
           <tbody>
             {this.state.books.map((item) => (
               <tr>
-                <th scope="row">{item.key}</th>
+                
                 <td>{item.author}</td>
                 <td>{item.title}</td>
               </tr>
