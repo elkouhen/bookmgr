@@ -92,11 +92,4 @@ custom:
           - table: books
             sources: [ ./data/books.json ]
 
-  fixtures:
-    rules:
-      - table: book
-        enable: true
-        sources:
-          - ./data/books.json
-
   pythonRequirements: ${file(config.yml):pythonRequirements}

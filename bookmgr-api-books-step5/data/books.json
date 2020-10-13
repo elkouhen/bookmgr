@@ -3,5 +3,15 @@
     "id": 1,
     "author": "GoF",
     "title": "Design Patterns"
+  },
+  {
+    "id": 2,
+    "author": "Eric Evans",
+    "title": "Domain-Driven Design"
+  },
+  {
+    "id": 3,
+    "author": "Kent Beck",
+    "title": "Test-Driven Development by Example"
   }
 ]
